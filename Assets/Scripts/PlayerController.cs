@@ -20,64 +20,23 @@ public class PlayerController : MonoBehaviour
 
     public static int score = 0;
 
+    [SerializeField] private AdaptiveController adaptiveController;
+    private bool started = false;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void startGame()
     {
-
-        //source = GetComponent<AudioSource>();
+        started = true;
     }
+
 
     // Update is called once per frame
     void Update()
     {
 
         scoreText.text = "Score: " + score.ToString();
-        float delta = Time.deltaTime; 
-        //check collisions 
+        float delta = Time.deltaTime;
 
-        //TODO: get position from UDP
-        /*
-        if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(new Vector3(0, speed* Time.deltaTime, 0));
-        }
-        else if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow)) 
-        {
-            transform.Translate(new Vector3(0, -speed* Time.deltaTime, 0));
-        }
-        else if (Input.GetKey("x"))
-        {
-            Application.Quit();
-        }
-        */
-
-
-
-        /*
-        if (rangeSet == 2 && newPosition == 1)
-        {
-            
-            float temp = float.Parse(stringArray[1]);
-            float prev = position;
-            x = -10f * (temp - range[0]) / (range[1] - range[0]) + 5f;
-            velocity = (position - prev) / delta;
-
-            
-        }
-        else if(rangeSet == 2 && newPosition == 0)
-        {
-            //position = position + velocity * delta;
-
-            Debug.Log(delta);
-        }
-
-        position = position + (k / m) * (x - position) * Mathf.Pow(delta,2f);
-
-        newPosition = 0;
-        transform.SetPositionAndRotation(new Vector3(0, position, -10), Quaternion.identity);
-          */
+        if(started) adaptiveController.addNewData(score, 0);
 
 
     }
